@@ -13,7 +13,7 @@
 
 <div class="container mt-5">
   <div class="card p-4 mx-auto form-box">
-    <h3 class="text-center">Connexion Admin</h3>
+    <h3 class="text-center">Connexion admin</h3>
 
     <form method="post">
       <input type="email" class="form-control mb-3" placeholder="Email admin" required>
