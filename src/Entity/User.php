@@ -5,16 +5,20 @@ class User
 {
     protected $id;
     protected $username;
+    protected $email;
     protected $password;
     protected $date_inscription;
     protected role $role;
+    protected $statut = "en attente";
 
-    public function __construct($id, $username, $password, $date_inscription = null)
+    public function __construct( $username,$email, $password,$id=null, $date_inscription = null)
     {
         $this->id = $id;
+        $this->email=$email;
         $this->username = $username;
         $this->password = $password;
         $this->date_inscription = $date_inscription;
+        
     }
     public function getId()
     {
@@ -23,6 +27,10 @@ class User
     public function getUsername()
     {
         return $this->username;
+    }
+    public function getEmail()
+    {
+        return $this->email;
     }
     public function getPassword()
     {
@@ -36,10 +44,14 @@ class User
     {
         return $this->role;
     }
+    public function getStatut(){
+        return $this->statut;
+    }
     public function setRole($role)
     {
         $this->role = $role;
     }
+    
     public function setId($id)
     {
         $this->id = $id;
@@ -48,6 +60,10 @@ class User
     {
         $this->username = $username;
     }
+    public function setEmail($email)
+    {
+       $this->email=$email;
+    }
     public function setPassword($password)
     {
         $this->password = $password;
@@ -55,5 +71,8 @@ class User
     public function setDate_inscription($date_inscription)
     {
         $this->date_inscription = $date_inscription;
+    }
+    public function setStatut($statut){
+        return $this->statut=$statut;
     }
 }
