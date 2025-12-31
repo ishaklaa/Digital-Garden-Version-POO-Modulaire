@@ -44,13 +44,18 @@ class UserRepository
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $id = $result["id"];
         $query2 = "UPDATE utilisateurs SET nom = $nom, PASSWORD = $password,email=$emailup WHERE id= $id";
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($query2);
         $stmt->execute();
     }
-    public function deleteUser($id)
+    public function deleteUser($email)
     {
-        $query = "delete from utilisateurs where id =$id ";
+        $query = "select id from utilisateurs where email =$email";
         $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $id = $result["id"];
+        $query2 = "delete from utilisateurs where id =$id ";
+        $stmt = $this->conn->prepare($query2);
         $stmt->execute();
     }
 }
