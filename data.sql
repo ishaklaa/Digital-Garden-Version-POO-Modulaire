@@ -10,6 +10,7 @@ CREATE TABLE utilisateurs(
     username VARCHAR(50) NOT NULL UNIQUE,
     PASSWORD VARCHAR(255) NOT NULL,
     email VARCHAR(30) UNIQUE,
+    statut ENUM ("en attente","active","bloquée"),
     dateInscription DATE NOT NULL ,
     FOREIGN KEY(role_id) REFERENCES role(id)
 );
