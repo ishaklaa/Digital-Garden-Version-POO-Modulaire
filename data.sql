@@ -36,3 +36,8 @@ CREATE TABLE administrateur(
 CREATE TABLE gardners(
     id int  AUTO_INCREMENT PRIMARY KEY
 );
+ALTER TABLE utilisateurs
+ADD COLUMN statut ENUM('en attente','active','bloquée');
+
+insert into role (nom) VALUES ("user");
+insert into role (nom) VALUES ("admin");
