@@ -1,6 +1,5 @@
 <?php
-
-
+require_once __DIR__ . '../../../../config/database.php';
 class LoginService
 {
 
@@ -8,14 +7,14 @@ class LoginService
     private $conn;
     private $password;
 
-public function __construct()
-{
-    // 1. Create the instance
-    $db = new Database();
-    
-    // 2. Call the method and assign it to the property
-    $this->conn = $db->getConnection();
-}
+    public function __construct()
+    {
+        // 1. Create the instance
+        $db = new Database();
+
+        // 2. Call the method and assign it to the property
+        $this->conn = $db->getConnection();
+    }
 
     public function __set($name, $value)
     {
@@ -39,5 +38,4 @@ public function __construct()
     {
         return password_verify($password, $hashedPassword);
     }
-    
 }

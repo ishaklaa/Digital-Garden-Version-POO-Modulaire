@@ -15,6 +15,6 @@
   <span class="navbar-brand">🌱 Digital Garden</span>
   <nav>
     <a href="login.php" class="btn btn-light btn-sm">Connexion</a>
-    <a href="/public/register.php" class="btn btn-outline-light btn-sm">Inscription</a>
+    <a href="register.php" class="btn btn-outline-light btn-sm">Inscription</a>
   </nav>
 </header>

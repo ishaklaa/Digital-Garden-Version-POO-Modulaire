@@ -1,4 +1,9 @@
-<?php include '../includes/header.php'; ?>
+<?php
+ include '../includes/header.php';
+ require "../src/Repository/UserRepository.php";
+ ?>
+ 
+ 
 <?php
 ?>
 <div class="container mt-5">

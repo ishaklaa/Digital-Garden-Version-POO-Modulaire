@@ -1,6 +1,6 @@
 <?php
-include_once "config\database.php";
-include_once "src\Entity\Theme.php";
+
+include_once __DIR__ . "/Theme.php";
 
 class Note
 {
