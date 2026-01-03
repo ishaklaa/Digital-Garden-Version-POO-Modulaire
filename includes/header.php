@@ -14,7 +14,7 @@
 <header class="navbar navbar-dark bg-success px-4">
   <span class="navbar-brand">🌱 Digital Garden</span>
   <nav>
-    <a href="/public/login.php" class="btn btn-light btn-sm">Connexion</a>
+    <a href="login.php" class="btn btn-light btn-sm">Connexion</a>
     <a href="/public/register.php" class="btn btn-outline-light btn-sm">Inscription</a>
   </nav>
 </header>

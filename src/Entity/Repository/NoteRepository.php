@@ -79,7 +79,7 @@ class NoteRepository
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
-            ':titre'      => $note-> getTitre(),
+            ':titre'      => $note->getTitre(),
             ':importance' => $note->getImportance(),
             ':contenu'    => $note->getContenu(),
             ':id'         => $note->getId()
