@@ -1,4 +1,6 @@
-<?php include '../includes/header.php'; ?>
+<?php include '../includes/header.php';
+
+ ?>
 <?php
 ?>
 <div class="container mt-5">

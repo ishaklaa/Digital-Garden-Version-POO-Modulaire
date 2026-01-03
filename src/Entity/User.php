@@ -1,6 +1,7 @@
 <?php
-include_once "config\database.php";
+
 include_once "src\Entity\role.php";
+
 class User
 {
     protected $id;

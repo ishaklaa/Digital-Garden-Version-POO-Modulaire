@@ -1,15 +1,13 @@
 <?php
-include_once "src\Entity\User.php";
-
+require_once __DIR__ . "/config/database.php";
+require_once __DIR__ . "../src/user.php";
 class UserRepository
 {
     private $conn;
     public function __construct()
     {
-
-        $this->conn = new Database()->getConnection();
+        $this->conn = (new Database())->getConnection();
     }
-
     public function addUser($user)
     {
         //$user->setRole(new Role("user"))
@@ -58,17 +56,16 @@ class UserRepository
         $stmt = $this->conn->prepare($query2);
         $stmt->execute();
     }
-    public function showAllUsers(){
-        $query="select * from utilisateurs ";
+    public function showAllUsers()
+    {
+        $query = "select * from utilisateurs ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $users_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $users=[];
-        foreach($users_array as $user){
-         $users[] = new user ($user["username"],$user["email"],$user["password"],$user["id"],$user["date_inscription"]);
+        $users = [];
+        foreach ($users_array as $user) {
+            $users[] = new user($user["username"], $user["email"], $user["password"], $user["id"], $user["date_inscription"]);
         }
         return $users;
-
-
     }
 }
