@@ -1,6 +1,6 @@
 <?php
 
-include_once "src\Entity\role.php";
+require_once __DIR__ . "/role.php";
 
 class User
 {

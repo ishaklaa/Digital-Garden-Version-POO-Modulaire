@@ -1,13 +1,15 @@
 <?php
-require_once __DIR__ . "/config/database.php";
-require_once __DIR__ . "../src/user.php";
+require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../Entity/User.php';
 class UserRepository
 {
     private $conn;
-    public function __construct()
-    {
-        $this->conn = (new Database())->getConnection();
-    }
+public function __construct()
+{
+    $db = new Database;
+    $this->conn = $db->getConnection();
+}
+
     public function addUser($user)
     {
         //$user->setRole(new Role("user"))

@@ -1,6 +1,6 @@
 <?php
-include_once "config\database.php";
-include_once "src\Entity\User.php";
+
+
 class Role{
     private $id;
     private $name;

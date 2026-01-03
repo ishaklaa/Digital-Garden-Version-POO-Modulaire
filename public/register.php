@@ -1,6 +1,6 @@
 <?php
  include '../includes/header.php';
- require_once __DIR__ . '/../src/Entity/Repository/UserRepository.php';
+ require "../src/Repository/UserRepository.php";
  ?>
  
  
