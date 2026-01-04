@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Theme Form</title>
 
+<?php include '../includes/header.php'; ?>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -73,6 +69,4 @@ button:hover {
         <button type="submit">Save Theme</button>
     </form>
 </div>
-
-</body>
-</html>
+<?php include '../includes/footer.php'; ?>
