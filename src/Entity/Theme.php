@@ -8,7 +8,7 @@ class Theme
 
     private $couleur;
 
-    public function __construct($id=null ,$nom, $couleur)
+    public function __construct($nom, $couleur,$id=null)
     {
         $this->nom = $nom;
         $this->couleur = $couleur;
