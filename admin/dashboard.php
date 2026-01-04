@@ -2,15 +2,12 @@
 
 <?php require "../src/Repository/UserRepository.php";
 
-
+session_start();
 $UserRepository = new UserRepository();
 $users = $UserRepository->showAllUsers();
 if (isset($_POST["status"])) {
-$selectedStatu = $_POST["status"];
-$id=$user->getId();
-$query= "UPDATE utilisateurs SET statut = '$selectedStatu'  WHERE id = $id";
-$stmt = $this->conn->prepare($query);
-$stmt->execute();
+  $selectedStatu = $_POST["status"];
+  $UserRepository->updateUserStatus($selectedStatu, $_SESSION["user"]);
 }
 ?>
 
@@ -42,11 +39,12 @@ $stmt->execute();
                                       default => 'bg-secondary'
                                     }; ?>">
                   <?php echo htmlspecialchars(ucfirst(str_replace('_', ' ', $user->getStatut()))); ?>
+                  <?php $_SESSION["user"]=$user ?>
                 </span>
               </p>
             </div>
             <div class="card-footer bg-transparent">
-              <form method="POST" action="dashboard.php" class="d-inline" >
+              <form method="POST" action="dashboard.php" class="d-inline">
                 <select name="status" class="form-select form-select-sm d-inline w-auto" onchange="this.form.submit()">
                   <option value="en_attente">En attente</option>
                   <option value="bloquee">Bloquée</option>

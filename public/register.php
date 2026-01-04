@@ -31,12 +31,13 @@ if (isset($_POST["inscription"])) {
     $user->setRole(new Role("user"));
     $UserRepository = new UserRepository();
     if ($UserRepository->addUser($user)) {
-      $success = true;
-      $errors = [];
+      
     } else {
       $errors[] = "Erreur inscription.";
     }
   }
+  $success = true;
+  $errors = [];
 }
 ?>
 

@@ -4,11 +4,11 @@ require_once __DIR__ . '/../Entity/User.php';
 class UserRepository
 {
     private $conn;
-public function __construct()
-{
-    $db = new Database;
-    $this->conn = $db->getConnection();
-}
+    public function __construct()
+    {
+        $db = new Database;
+        $this->conn = $db->getConnection();
+    }
 
     public function addUser($user)
     {
@@ -69,5 +69,12 @@ public function __construct()
             $users[] = new user($user["username"], $user["email"], $user["PASSWORD"], $user["id"], $user["dateInscription"]);
         }
         return $users;
+    }
+    public function updateUserStatus($selectedStatu,$id)
+    {
+        
+        $query = "UPDATE utilisateurs SET statut = '$selectedStatu'  WHERE id = $id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
     }
 }
