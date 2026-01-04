@@ -13,6 +13,10 @@ class Theme
         $this->nom = $nom;
         $this->couleur = $couleur;
     }
+     public function setId($id)
+    {
+        $this->id = $id;
+    }
     public function __setName($nom, $value)
     {
         $this->$nom = $value;
@@ -20,6 +24,11 @@ class Theme
     public function __setColor($couleur, $value)
     {
         $this->$couleur = $value;
+        
+    }
+    public function getId()
+    {
+        return $this->id;
     }
     public function __getName($nom)
     {

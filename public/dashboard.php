@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-$stmt = $pdo->prepare(
+$stmt = $conn->prepare(
     "SELECT t.nom AS theme, n.note
      FROM notes n
      JOIN themes t ON n.theme_id = t.id
