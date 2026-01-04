@@ -47,4 +47,3 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
 </div>
 <?php include '../includes/footer.php'; ?>
- 
