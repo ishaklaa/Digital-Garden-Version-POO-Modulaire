@@ -10,7 +10,8 @@ CREATE TABLE utilisateurs(
     username VARCHAR(50) NOT NULL UNIQUE,
     PASSWORD VARCHAR(255) NOT NULL,
     email VARCHAR(30) UNIQUE,
-    dateInscription DATE NOT NULL ,
+    statut ENUM ("en attente","active","bloquée"),
+    dateInscription datetime CURRENT_TIMESTAMP ,
     FOREIGN KEY(role_id) REFERENCES role(id)
 );
  CREATE TABLE themes(
@@ -26,7 +27,7 @@ CREATE TABLE utilisateurs(
     titre VARCHAR(20) NOT NULL,
     importance VARCHAR(20) NOT NULL,
     contenu TEXT NOT NULL,
-    date_creation DATE NOT NULL,
+    date_creation datetime CURRENT_TIMESTAMP,
     FOREIGN KEY(theme_id) REFERENCES themes(id)
 ); 
 
@@ -36,3 +37,9 @@ CREATE TABLE administrateur(
 CREATE TABLE gardners(
     id int  AUTO_INCREMENT PRIMARY KEY
 );
+ALTER TABLE utilisateurs
+ADD COLUMN statut ENUM('en attente','active','bloquée');
+
+
+insert into role (nom) VALUES ("user");
+insert into role (nom) VALUES ("admin");
