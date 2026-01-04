@@ -29,7 +29,7 @@ public function __construct()
     }
     public function getRoleId($roleString)
     {
-        $query = "select id from role where nom = $roleString ";
+        $query = "select id from role where nom = '$roleString' ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -66,7 +66,7 @@ public function __construct()
         $users_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $users = [];
         foreach ($users_array as $user) {
-            $users[] = new user($user["username"], $user["email"], $user["password"], $user["id"], $user["date_inscription"]);
+            $users[] = new user($user["username"], $user["email"], $user["PASSWORD"], $user["id"], $user["dateInscription"]);
         }
         return $users;
     }
