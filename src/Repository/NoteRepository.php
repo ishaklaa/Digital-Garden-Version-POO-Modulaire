@@ -1,63 +1,61 @@
 <?php
 
-require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../src/Note.php';
+require_once __DIR__ . "/../config/database.php";
+require_once __DIR__ . "/../src/Note.php";
 
 class NoteRepository
 {
-    private PDO $pdo;
+    private $pdo;
 
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
     }
-
-    public function create(Note $note): bool
+    public function create(Note $note)
     {
-        $sql = "INSERT INTO notes (theme_id, titre, importance, contenu)
-                VALUES (:theme_id, :titre, :importance, :contenu)";
+        $sql = "INSERT INTO notes ( titre, importance, contenu)
+                VALUES ( :titre, :importance, :contenu)";
 
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
-            ':theme_id'  => $note->getId(),
-            ':titre'     => $note->getTitre(),
-            ':importance'=> $note->getImportance(),
-            ':contenu'   => $note->getContenu()
+         
+            ':titre'         => $note->getTitre(),
+            ':importance'    => $note->getImportance(),
+            ':contenu'       => $note->getContenu(),
+            
         ]);
     }
 
-    public function findById(int $id): ?Note
+    public function findById($id)
     {
         $sql = "SELECT * FROM notes WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':id' => $id]);
 
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch();
 
-        if (!$data) {
-            return null;
+        if ($data) {
+            return new Note(
+                $data['theme_id'],
+                $data['titre'],
+                $data['importance'],
+                $data['contenu'],
+                $data['date_creation'],
+                $data['id']
+            );
         }
-
-        return new Note(
-            $data['theme_id'],
-            $data['titre'],
-            $data['importance'],
-            $data['contenu'],
-            $data['date_creation'],
-            $data['id']
-        );
+        return null;
     }
-
-    public function findByTheme(int $themeId): array
+    public function findByTheme($theme_id)
     {
         $sql = "SELECT * FROM notes WHERE theme_id = :theme_id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':theme_id' => $themeId]);
+        $stmt->execute([':theme_id' => $theme_id]);
 
         $notes = [];
 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetch()) {
             $notes[] = new Note(
                 $row['theme_id'],
                 $row['titre'],
@@ -70,29 +68,7 @@ class NoteRepository
 
         return $notes;
     }
-
-    public function findAll(): array
-    {
-        $sql = "SELECT * FROM notes ORDER BY date_creation DESC";
-        $stmt = $this->pdo->query($sql);
-
-        $notes = [];
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $notes[] = new Note(
-                $row['theme_id'],
-                $row['titre'],
-                $row['importance'],
-                $row['contenu'],
-                $row['date_creation'],
-                $row['id']
-            );
-        }
-
-        return $notes;
-    }
-
-    public function update(Note $note): bool
+    public function update(Note $note)
     {
         $sql = "UPDATE notes
                 SET titre = :titre,
@@ -110,7 +86,8 @@ class NoteRepository
         ]);
     }
 
-    public function delete(int $id): bool
+   
+    public function delete($id)
     {
         $sql = "DELETE FROM notes WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
