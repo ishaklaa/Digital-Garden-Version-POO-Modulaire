@@ -72,7 +72,7 @@ class UserRepository
     }
     public function updateUserStatus($selectedStatu,$id)
     {
-        
+        // $id=$user->getId();
         $query = "UPDATE utilisateurs SET statut = '$selectedStatu'  WHERE id = $id";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

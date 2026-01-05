@@ -9,10 +9,10 @@ class LoginService
 
     public function __construct()
     {
-        // 1. Create the instance
+        
         $db = new Database();
 
-        // 2. Call the method and assign it to the property
+        
         $this->conn = $db->getConnection();
     }
 
