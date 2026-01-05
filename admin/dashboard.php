@@ -4,10 +4,14 @@
 
 session_start();
 $UserRepository = new UserRepository();
-$users = $UserRepository->showAllUsers();
+$users= $UserRepository->showAllUsers();
+
 if (isset($_POST["status"])) {
   $selectedStatu = $_POST["status"];
-  $UserRepository->updateUserStatus($selectedStatu, $_SESSION["user"]);
+  $id = $_POST["id"];
+
+
+  $UserRepository->updateUserStatus($selectedStatu, $id);
 }
 ?>
 
@@ -38,14 +42,15 @@ if (isset($_POST["status"])) {
                                       'en_attente' => 'bg-warning',
                                       default => 'bg-secondary'
                                     }; ?>">
-                  <?php echo htmlspecialchars(ucfirst(str_replace('_', ' ', $user->getStatut()))); ?>
-                  <?php $_SESSION["user"]=$user ?>
+                  <?php echo htmlspecialchars( $user->getStatut()); ?>
+                  
                 </span>
               </p>
             </div>
             <div class="card-footer bg-transparent">
               <form method="POST" action="dashboard.php" class="d-inline">
-                <select name="status" class="form-select form-select-sm d-inline w-auto" onchange="this.form.submit()">
+                <input type="hidden" name="id" value="<?= $user->getId(); ?>">
+                <select name="status" class="form-select form-select-sm d-inline w-auto"  onchange="this.form.submit()">
                   <option value="en_attente">En attente</option>
                   <option value="bloquee">Bloquée</option>
                   <option value="active">Active</option>
