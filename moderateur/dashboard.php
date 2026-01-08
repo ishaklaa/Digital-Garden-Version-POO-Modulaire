@@ -115,5 +115,4 @@
         </article>
 
     </section>
-
 <?php include '../includes/footer.php'; ?>
