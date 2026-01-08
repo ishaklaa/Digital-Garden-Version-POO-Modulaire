@@ -81,7 +81,7 @@ CREATE TABLE partage(
    note_id int,
    FOREIGN KEY (sender_id) REFERENCES utilisateurs(id),
    FOREIGN KEY (user_id) REFERENCES utilisateurs(id),
-   FOREIGN KEY (note_id) REFERENCES notess(id)
+   FOREIGN KEY (note_id) REFERENCES notes(id)
 
 );
 INSERT INTO role (nom) VALUES ('user'), ('admin'), ('modirateur');
