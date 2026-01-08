@@ -1,36 +1,34 @@
 <?php
 
+
+
 class Database
 {
     private string $host = "localhost";
     private string $db_name = "dgarden";
     private string $username = "root";
     private string $password = "";
-    private ?PDO $conn = null;
-
-    public function __construct()
+    private static ?Database $instance = null;
+    private PDO $connection;
+    private function __construct()
     {
-        try {
-            $dsn = "mysql:host={$this->host};dbname={$this->db_name};charset=utf8mb4";
-
-            $this->conn = new PDO(
-                $dsn,
-                $this->username,
-                $this->password,
-                [
-                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES   => false,
-                ]
-            );
-        } catch (PDOException $e) {
-            // Never echo DB errors in production
-            throw new RuntimeException("Database connection failed.");
-        }
+        $dsn = "mysql:host={$this->host};dbname={$this->db_name};charset=utf8mb4";
+        $this->connection = new PDO(
+            $dsn,
+            $this->username,
+            $this->password            
+        );
     }
+    public static function getInstance(): ?Database
+    {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
 
+        return self::$instance;
+    }
     public function getConnection(): PDO
     {
-        return $this->conn;
+        return $this->connection;
     }
 }
