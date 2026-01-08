@@ -85,3 +85,4 @@ CREATE TABLE partage(
 
 );
 INSERT INTO role (nom) VALUES ('user'), ('admin'), ('modirateur');
+
