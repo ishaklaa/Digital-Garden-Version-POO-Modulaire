@@ -57,7 +57,7 @@ CREATE TABLE signalement (
     raison TEXT NOT NULL,
     datesignal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id int,
-    FOREIGN KEY (user_id) REFERENCES utilisateurs(id),
+    FOREIGN KEY (user_id) REFERENCES utilisateurs(id)
 );
 CREATE table favnote(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -79,6 +79,7 @@ CREATE TABLE partage(
    id INT AUTO_INCREMENT PRIMARY KEY,
    user_id int,
    note_id int,
+   sender_id int,
    FOREIGN KEY (sender_id) REFERENCES utilisateurs(id),
    FOREIGN KEY (user_id) REFERENCES utilisateurs(id),
    FOREIGN KEY (note_id) REFERENCES notes(id)
