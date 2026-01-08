@@ -10,7 +10,8 @@ class Note
     protected $importance;
     protected $dateCreation;
     protected $theme;
-    public function __construct($id = null, $contenu, $titre, $importance, $dateCreation = null)
+    protected $statut;
+    public function __construct($id = null, $contenu, $titre, $importance, $statut, $dateCreation = null)
     {
         $this->id = $id;
         $this->contenu = $contenu;
@@ -38,6 +39,10 @@ class Note
     {
         return $this->theme;
     }
+    public function getStatut($statut)
+    {
+        return $this->statut;
+    }
     public function setId($id)
     {
         $this->id = $id;
@@ -57,5 +62,9 @@ class Note
     public function settheme($theme)
     {
         $this->theme = $theme;
+    }
+    public function setStatut($statut)
+    {
+        return $this->statut = $statut;
     }
 }

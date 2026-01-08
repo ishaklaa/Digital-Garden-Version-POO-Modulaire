@@ -12,14 +12,13 @@ class User
     protected role $role;
     protected $statut = "en attente";
 
-    public function __construct( $username,$email, $password,$id=null, $date_inscription = null)
+    public function __construct($username, $email, $password, $id = null, $date_inscription = null)
     {
         $this->id = $id;
-        $this->email=$email;
+        $this->email = $email;
         $this->username = $username;
         $this->password = $password;
         $this->date_inscription = $date_inscription;
-        
     }
     public function getId()
     {
@@ -45,14 +44,15 @@ class User
     {
         return $this->role;
     }
-    public function getStatut(){
+    public function getStatut()
+    {
         return $this->statut;
     }
     public function setRole($role)
     {
         $this->role = $role;
     }
-    
+
     public function setId($id)
     {
         $this->id = $id;
@@ -63,7 +63,7 @@ class User
     }
     public function setEmail($email)
     {
-       $this->email=$email;
+        $this->email = $email;
     }
     public function setPassword($password)
     {
@@ -73,7 +73,8 @@ class User
     {
         $this->date_inscription = $date_inscription;
     }
-    public function setStatut($statut){
-        return $this->statut=$statut;
+    public function setStatut($statut)
+    {
+        return $this->statut = $statut;
     }
 }
