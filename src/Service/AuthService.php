@@ -15,17 +15,17 @@ if (isset($_POST["login"])) {
 
             session_start();
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['nom'];
-            $_SESSION['role'] = $user['role'];
+            $_SESSION['user_name'] = $user['name'];
+            $_SESSION['role_id'] = $user['role_id'];
             $_SESSION['status'] = $user['status'];
 
-            if ($_SESSION['status'] !== 'pending') {
+            if ($_SESSION['status'] !== 'en attente') {
 
-                if ($_SESSION['role'] === 'user') {
+                if ($_SESSION['role_id'] === 3) {
                     header("Location: ../../public/dashboard.php");
-                } else if ($_SESSION['role'] === 'admin') {
+                } else if ($_SESSION['role_id'] === 1) {
                     header("Location: ../../admin/dashboard.php");
-                } else if ($_SESSION['role'] === 'moderateur') {
+                } else if ($_SESSION['role_id'] === 2) {
                     header("Location: ../../moderateur/dashboard.php");
                 } else {
                     header("Location: ../../public/login.php");
@@ -35,7 +35,7 @@ if (isset($_POST["login"])) {
 
             } else {
                 
-                header("Location: ../../public/login.php");
+                header("Location: ../../public/pending.php");
                 exit();
             }
 

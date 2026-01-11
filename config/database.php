@@ -19,16 +19,13 @@ class Database
             $this->password            
         );
     }
-    public static function getInstance(): ?Database
+    public static function getConnection(): PDO
     {
         if (self::$instance === null) {
             self::$instance = new Database();
         }
 
-        return self::$instance;
+        return self::$instance->connection;
     }
-    public function getConnection(): PDO
-    {
-        return $this->connection;
-    }
+    
 }

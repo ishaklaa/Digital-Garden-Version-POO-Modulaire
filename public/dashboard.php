@@ -9,9 +9,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $userId = $_SESSION['user_id'];
-$db = new Database;
-$pdo = $db->getConnection();
-$themeRepo = new ThemeRepository($pdo);
+
+$pdo = Database::getConnection();
+       
+
+$themeRepo = new ThemeRepository();
 
 $themes = $themeRepo->findByUser($userId);
 
@@ -128,13 +130,14 @@ include '../includes/header.php';
 <main>
 
   <a class="add-theme" href="add_theme.php">+ Add Theme</a>
-
+ 
   <?php if (empty($themes)): ?>
+
     <p>No themes found.</p>
   <?php else: ?>
     <?php foreach ($themes as $theme): ?>
-      <div class="card" style="border-top: 5px solid <?= htmlspecialchars($theme->getColor($color)) ?>">
-        <h3><?= htmlspecialchars($theme->getName($nom)) ?></h3>
+      <div class="card" style="border-top: 5px solid <?= htmlspecialchars($theme->getColor()) ?>">
+        <h3><?= htmlspecialchars($theme->getTiltle()) ?></h3>
 
         <div class="buttons">
           <a class="view" href="notes.php?theme_id=<?= $theme->getId() ?>">View</a>

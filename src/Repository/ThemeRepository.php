@@ -4,36 +4,43 @@ require_once __DIR__ . "/../Entity/Theme.php";
 
 class ThemeRepository
 {
-    private $pdo;
+    private $conn;
 
-    public function __construct(PDO $pdo)
+    public function __construct()
     {
-        $this->pdo = $pdo;
+        $this->conn = Database::getConnection();
     }
-    public function create(Theme $theme)
+    public function create($theme)
     {
-        $sql = "INSERT INTO themes (nom, couleur, user_id)
-                VALUES (:nom, :couleur, :user_id)";
-        $stmt = $this->pdo->prepare($sql);
+        $sql = "INSERT INTO themes (title, color, user_id,visibility)
+                VALUES (:nom, :couleur, :user_id,:visibility)";
+        $stmt = $this->conn->prepare($sql);
+        $title = $theme->getTiltle();
+        $color = $theme->getColor();
+        $privacy = $theme->getPrivacy();
+        $userId = $theme->getUser_id();
+        $stmt->bindParam(":nom", $title);
+        $stmt->bindParam(":couleur", $color);    
+        $stmt->bindParam(":user_id", $userId);
+        $stmt->bindParam(":visibility", $privacy);
+        $stmt->execute();
+        
+    }
 
-        return $stmt->execute([
-            ':nom' => $this->$theme->nom,
-            ':couleur' => $this->$theme->couleur,
-            ':user_id' => $this->$theme->user_id
-        ]);
-    }
+       
+    
     public function findById($id)
     {
         $sql = "SELECT * FROM themes WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute([':id' => $id]);
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
             return new Theme(
-                $data['nom'],
-                $data['couleur'],
+                $data['title'],
+                $data['color'],
                 $data['user_id'],
                 $data['id']
             );
@@ -43,16 +50,16 @@ class ThemeRepository
     public function findByUser($user_id)
     {
         $sql = "SELECT * FROM themes WHERE user_id = :user_id";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute([':user_id' => $user_id]);
 
         $themes = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $themes[] = new Theme(
-                $row['nom'],
-                $row['couleur'],
+                $row['Title'],
+                $row['color'],
                 $row['user_id'],
-                $row['id']
+                $row['visibility']
             );
         }
 
@@ -64,7 +71,7 @@ class ThemeRepository
         $sql = "UPDATE themes
                 SET nom = :nom, couleur = :couleur
                 WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([
             ':nom' => $this->$theme->nom,
@@ -76,7 +83,7 @@ class ThemeRepository
     public function delete($id)
     {
         $sql = "DELETE FROM themes WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([':id' => $id]);
     }

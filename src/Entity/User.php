@@ -8,17 +8,17 @@ class User
     protected $username;
     protected $email;
     protected $password;
-    protected $date_inscription;
+    // protected $date_inscription;
     protected role $role;
     protected $statut = "en attente";
 
-    public function __construct($username, $email, $password, $id = null, $date_inscription = null)
+    public function __construct($username, $email, $password, $id = null)
     {
         $this->id = $id;
         $this->email = $email;
         $this->username = $username;
         $this->password = $password;
-        $this->date_inscription = $date_inscription;
+        // $this->date_inscription = $date_inscription;
     }
     public function getId()
     {
@@ -36,10 +36,10 @@ class User
     {
         return $this->password;
     }
-    public function getDate_inscription()
-    {
-        return $this->date_inscription;
-    }
+    // public function getDate_inscription()
+    // {
+    //     return $this->date_inscription;
+    // }
     public function getRole()
     {
         return $this->role;
@@ -69,10 +69,10 @@ class User
     {
         $this->password = $password;
     }
-    public function setDate_inscription($date_inscription)
-    {
-        $this->date_inscription = $date_inscription;
-    }
+    // public function setDate_inscription($date_inscription)
+    // {
+    //     $this->date_inscription = $date_inscription;
+    // }
     public function setStatut($statut)
     {
         return $this->statut = $statut;

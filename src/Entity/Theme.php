@@ -4,47 +4,55 @@ class Theme
 
     private $id;
 
-    private $nom;
+    private $title;
 
     private $couleur;
+    private $user_id;
+    private $privacy;
 
-    private $statut;
+   
 
-    public function __construct($nom, $couleur, $statut, $id = null)
+    public function __construct($title, $couleur, $user_id, $privacy,$id = null)
     {
-        $this->nom = $nom;
+        $this->title = $title;
         $this->couleur = $couleur;
+        $this->user_id= $user_id;
+        $this->privacy= $privacy;
     }
     public function setId($id)
     {
         $this->id = $id;
     }
-    public function setName($nom, $value)
+    public function setTitle( $value)
     {
-        $this->$nom = $value;
+        $this->title = $value;
     }
-    public function setColor($couleur, $value)
+    public function setColor( $value)
     {
-        $this->$couleur = $value;
+        $this->couleur = $value;
     }
-    public function setStatut($statut)
-    {
-        return $this->statut = $statut;
+    public function setUser_id($user_id){
+        $this->user_id= $user_id;
     }
+    
     public function getId()
     {
         return $this->id;
     }
-    public function getName($nom)
+    public function getTiltle()
     {
-        return $this->$nom;
+        return $this->title;
     }
-    public function getColor($couleur)
+    public function getColor()
     {
-        return $this->$couleur;
+        return $this->couleur;
     }
-    public function getStatut($statut)
+     public function getPrivacy()
     {
-        return $this->statut;
+        return $this->privacy;
+    } public function getUser_id()
+    {
+        return $this->user_id;
     }
+    
 }

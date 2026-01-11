@@ -28,7 +28,7 @@ if (isset($_POST["inscription"])) {
   if (empty($errors)) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $user = new user($name, $email, $hashed_password);
-    $user->setRole(new Role("user"));
+    $user->setRole(new Role("Gardener"));
     $UserRepository = new UserRepository();
     if ($UserRepository->addUser($user)) {
       
@@ -63,7 +63,7 @@ if (isset($_POST["inscription"])) {
       <input type="text" class="form-control mb-3" name="nom" value="<?php echo htmlspecialchars($name ?? ''); ?>" placeholder="Nom d'utilisateur" required>
       <input type="email" class="form-control mb-3" name="email" value="<?php echo htmlspecialchars($email ?? ''); ?>" placeholder="Email" required>
       <input type="password" class="form-control mb-3" name="password" placeholder="Mot de passe" required>
-      <button class="btn btn-success w-100" name="inscription">Inscription</button>
+      <button class="btn btn-success w-100" name="inscription" type="submit">Inscription</button>
     </form>
   </div>
 </div>
