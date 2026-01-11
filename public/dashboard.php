@@ -1,25 +1,22 @@
 <?php
-// MUST be first
 session_start();
 
 require_once './../config/database.php';
 require_once '../src/Repository/ThemeRepository.php';
-
-// Security: user must be logged in
 if (!isset($_SESSION['user_id'])) {
   header('Location: login.php');
   exit;
 }
 
 $userId = $_SESSION['user_id'];
-$db = new Database;
-$pdo = $db->getConnection();
-$themeRepo = new ThemeRepository($pdo);
 
-// Get themes of logged-in user
+$pdo = Database::getConnection();
+       
+
+$themeRepo = new ThemeRepository();
+
 $themes = $themeRepo->findByUser($userId);
 
-// Header AFTER PHP logic
 include '../includes/header.php';
 ?>
 
@@ -133,13 +130,14 @@ include '../includes/header.php';
 <main>
 
   <a class="add-theme" href="add_theme.php">+ Add Theme</a>
-
+ 
   <?php if (empty($themes)): ?>
+
     <p>No themes found.</p>
   <?php else: ?>
     <?php foreach ($themes as $theme): ?>
-      <div class="card" style="border-top: 5px solid <?= htmlspecialchars($theme->__getColor($color)) ?>">
-        <h3><?= htmlspecialchars($theme->__getName($nom)) ?></h3>
+      <div class="card" style="border-top: 5px solid <?= htmlspecialchars($theme->getColor()) ?>">
+        <h3><?= htmlspecialchars($theme->getTiltle()) ?></h3>
 
         <div class="buttons">
           <a class="view" href="notes.php?theme_id=<?= $theme->getId() ?>">View</a>

@@ -10,10 +10,7 @@ class LoginService
     public function __construct()
     {
         
-        $db = new Database();
-
-        
-        $this->conn = $db->getConnection();
+        $this->conn = Database::getConnection();
     }
 
     public function __set($name, $value)
@@ -26,7 +23,7 @@ class LoginService
     }
     public function CheckDatabase($email)
     {
-        $query = "SELECT * FROM utilisateurs WHERE email = :email";
+        $query = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":email", $email);
         $stmt->execute();

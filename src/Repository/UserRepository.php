@@ -6,15 +6,14 @@ class UserRepository
     private $conn;
     public function __construct()
     {
-        $db = new Database;
-        $this->conn = $db->getConnection();
+        $this->conn = Database::getConnection();
     }
 
     public function addUser($user)
     {
         //$user->setRole(new Role("user"))
         $role_id = $this->getRoleId($user->getRole()->getName());
-        $query = "insert into utilisateurs (username,PASSWORD,email,statut,role_id) values (:username,:PASSWORD,:email,:statut,:role_id)";
+        $query = "insert into users (name,password,email,status,role_id) values (:username,:PASSWORD,:email,:statut,:role_id)";
         $stmt = $this->conn->prepare($query);
         $username = $user->getUsername();
         $password = $user->getPassword();
@@ -29,7 +28,7 @@ class UserRepository
     }
     public function getRoleId($roleString)
     {
-        $query = "select id from role where nom = '$roleString' ";
+        $query = "select id from roles where title = '$roleString' ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -38,42 +37,42 @@ class UserRepository
     }
     public function updateUser($nom, $password, $email, $emailup)
     {
-        $query = "select id from utilisateurs where email =$email";
+        $query = "select id from users where email =$email";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $id = $result["id"];
-        $query2 = "UPDATE utilisateurs SET nom = $nom, PASSWORD = $password,email=$emailup WHERE id= $id";
+        $query2 = "UPDATE users SET nom = $nom, PASSWORD = $password,email=$emailup WHERE id= $id";
         $stmt = $this->conn->prepare($query2);
         $stmt->execute();
     }
     public function deleteUser($email)
     {
-        $query = "select id from utilisateurs where email =$email";
+        $query = "select id from users where email =$email";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $id = $result["id"];
-        $query2 = "delete from utilisateurs where id =$id ";
+        $query2 = "delete from users where id =$id ";
         $stmt = $this->conn->prepare($query2);
         $stmt->execute();
     }
     public function showAllUsers()
     {
-        $query = "select * from utilisateurs ";
+        $query = "select * from users ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $users_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $users = [];
         foreach ($users_array as $user) {
-            $users[] = new user($user["username"], $user["email"], $user["PASSWORD"], $user["id"], $user["dateInscription"]);
+            $users[] = new user($user["name"], $user["email"], $user["password"], $user["id"]);
         }
         return $users;
     }
     public function updateUserStatus($selectedStatu,$id)
     {
         // $id=$user->getId();
-        $query = "UPDATE utilisateurs SET statut = '$selectedStatu'  WHERE id = $id";
+        $query = "UPDATE users SET status = '$selectedStatu'  WHERE id = $id";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
     }
